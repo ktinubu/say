@@ -52,7 +52,7 @@ func main() {
 	timeout := 3 * time.Second
 
 	if *withinCluster {
-		addr := "set-0.say.default.svc.cluster.local"
+		addr := "set-0.say-statefulset.default.svc.cluster.local:8080"
 		conn, err = grpc.Dial(
 			addr, grpc.WithInsecure(), grpc.WithBlock(),
 			grpc.WithTimeout(timeout))
