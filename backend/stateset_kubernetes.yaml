@@ -24,7 +24,7 @@ spec:
   selector:
     matchLabels:
       app: say # has to match .spec.template.metadata.labels
-  serviceName: "set"
+  serviceName: "say-service"
   replicas: 3 # by default is 1
   template:
     metadata:
