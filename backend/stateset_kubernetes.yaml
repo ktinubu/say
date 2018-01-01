@@ -1,0 +1,40 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: say-service
+  labels:
+    app: say
+spec:
+  ports:
+  - port: 8080
+    name: set
+  clusterIP: None
+  selector:
+    app: say
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: say-StatefulSet
+  labels:
+    app: say
+spec:
+  selector:
+    matchLabels:
+      app: say # has to match .spec.template.metadata.labels
+  serviceName: "set"
+  replicas: 3 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: say # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: say
+        image: gcr.io/text2speech-190611/say
+        ports:
+        - containerPort: 8080
+          name: set

@@ -1,4 +1,9 @@
 build:
 	GOOS=linux go build -o app
-	docker build -t ktinubu/say .
+	GOOS=linux go build github.com/ktinubu/text2speech/client
+	docker build -t say .
 	rm -f app
+	rm -f client
+
+push:
+	gcloud docker -- push gcr.io/text2speech-190611/say
