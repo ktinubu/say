@@ -24,7 +24,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: say-service
+  name: say-service-lb
 spec:
   selector:
     app: say

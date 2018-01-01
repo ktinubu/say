@@ -19,7 +19,7 @@ func getEnvWithBackup(key, fallback string) string {
 	return fallback
 }
 
-func textToSpeech(backend *string, output *string, conn *grpc.ClientConn) {
+func textToSpeech(output *string, conn *grpc.ClientConn) {
 
 	defer conn.Close()
 
@@ -57,7 +57,7 @@ func main() {
 			addr, grpc.WithInsecure(), grpc.WithBlock(),
 			grpc.WithTimeout(timeout))
 		if err != nil {
-			log.Fatalf("could not connect to %s: %v", *backend, err)
+			log.Fatalf("could not connect to %s: %v", addr, err)
 		}
 		log.Print("...")
 	} else {
@@ -66,10 +66,10 @@ func main() {
 			addr, grpc.WithInsecure(), grpc.WithBlock(),
 			grpc.WithTimeout(timeout))
 		if err != nil {
-			log.Fatalf("could not connect to %s: %v", *backend, err)
+			log.Fatalf("could not connect to %s: %v", addr, err)
 		}
 		log.Print("(((")
 	}
-	textToSpeech(backend, output, conn)
+	textToSpeech(output, conn)
 
 }

@@ -14,10 +14,10 @@ spec:
     app: say
 ---
 
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: say-StatefulSet
+  name: say-statefulset
   labels:
     app: say
 spec:
@@ -38,3 +38,16 @@ spec:
         ports:
         - containerPort: 8080
           name: set
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: say-service-lb
+spec:
+  selector:
+    app: say
+  ports:
+  - protocol: TCP
+    port: 8080
+  type: LoadBalancer
